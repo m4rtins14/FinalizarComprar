@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Pagamento</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <header class="header">
+        <h1>Escolha a forma de pagamento</h1>
+    </header>
+    <main class="container">
+        <div class="payment-options">
+            <button class="payment-button" onclick="redirectToPix()">
+                <img src="pix-icon2.png" alt="Ícone Pix" class="payment-icon">
+                <span>Pix</span>
+            </button>
+            <!-- Cartão de Crédito -->
+            <button class="payment-button" onclick="processPayment('credit')">
+                <img src="credit-card-icon2.png" alt="Ícone Crédito" class="payment-icon">
+                <span>Cartão de Crédito</span>
+            </button>
+            <!-- Cartão de Débito -->
+            <button class="payment-button" onclick="processPayment('debit')">
+                <img src="debit-card-icon2.png" alt="Ícone Débito" class="payment-icon">
+                <span>Cartão de Débito</span>
+            </button>
+        </div>
+    </main>
+    <footer class="footer">
+        <p>&copy; 2024 Sistema de Pagamento. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        async function processPayment(type) {
+            const response = await fetch('http://localhost:3000/create-payment-intent', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ paymentMethod: type, amount: 10000 }) // Valor em centavos
+            });
+
+            const { clientSecret } = await response.json();
+
+            const stripe = Stripe('sua-chave-publica'); // Substitua pela chave pública do Stripe
+
+            const { error } = await stripe.confirmCardPayment(clientSecret);
+
+            if (error) {
+                alert(`Erro no pagamento: ${error.message}`);
+            } else {
+                alert('Pagamento realizado com sucesso!');
+            }
+        }
+
+        function redirectToPix() {
+            window.location.href = 'pix.html';
+        }
+    </script>
+</body>
+</html>

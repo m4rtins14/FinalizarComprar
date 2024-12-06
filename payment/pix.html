@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento Pix</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Pagamento com Pix</h1>
+    </header>
+    <main class="container">
+        <h2>Escaneie o QR Code abaixo para realizar o pagamento:</h2>
+        <div id="qr-container">
+            <img id="qr-code" alt="QR Code Pix" src="qcode.png">
+        </div>
+        <p>Chave Pix: 11994895685</p>
+    </main>
+    <footer class="footer">
+        <p>&copy; 2024 Sistema de Pagamento. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        async function generateQrCode() {
+            const response = await fetch('http://localhost:3000/create-pix', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ value: 100.00 }) // Valor do Pix
+            });
+
+            const data = await response.json();
+
+            if (data.qr_code) {
+                document.getElementById('qr-code').src = `data:image/png;base64,${data.qr_code}`;
+            } else {
+                alert('Erro ao gerar QR Code Pix.');
+            }
+        }
+
+        // Chama a função para gerar o QR Code
+        generateQrCode();
+
+        // Configura o redirecionamento após 2 minutos (120 segundos)
+        setTimeout(() => {
+            window.location.href = 'pagamento-finalizado.html'; // Redireciona para a página de sucesso
+        }, 100000); // 2 minutos em milissegundos
+    </script>
+</body>
+</html>

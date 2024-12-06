@@ -1,0 +1,99 @@
+/* Configuração geral */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .container {
+    background-color: white;
+    width: 400px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Título */
+  .title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #002f86;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilização dos itens */
+  .item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background-color: #002f86;
+    color: white;
+    border-radius: 8px;
+    gap: 15px;
+  }
+  
+  .item-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 2px solid white;
+  }
+  
+  .item-details {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+  }
+  
+  .price {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  /* Total */
+  .total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: #002f86;
+    padding: 10px;
+    background-color: #e6f0ff;
+    border-radius: 8px;
+  }
+  
+  /* Botão de finalização */
+  .finalize-button {
+    text-align: center;
+    width: 80%;
+    padding: 15px;
+    font-size: 18px;
+    background-color: white;
+    color: #002f86;
+    border: 2px solid #002f86;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    text-decoration: none;
+    margin: 0 auto;
+  }
+  
+  .finalize-button:hover {
+    background-color: #002f86;
+    color: white;
+  }
+  
